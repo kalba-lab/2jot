@@ -1,0 +1,6 @@
+-keep class androidx.compose.** { *; }
+-dontwarn androidx.compose.**
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-dontwarn androidx.room.**
+-keep class app.jot2.** { *; }

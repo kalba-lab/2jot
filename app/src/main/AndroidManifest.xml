@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name=".JotApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_jot"
+        android:label="2Jot"
+        android:roundIcon="@mipmap/ic_jot_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Jot2">
+
+        <activity
+            android:name=".ui.jot.JotActivity"
+            android:exported="true"
+            android:label="2Jot"
+            android:icon="@mipmap/ic_jot"
+            android:roundIcon="@mipmap/ic_jot_round"
+            android:windowSoftInputMode="adjustResize"
+            android:taskAffinity="app.jot2.jot">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.pin.PinActivity"
+            android:exported="true"
+            android:label="2Pin"
+            android:icon="@mipmap/ic_pin"
+            android:roundIcon="@mipmap/ic_pin_round"
+            android:theme="@style/Theme.Jot2"
+            android:taskAffinity="app.jot2.pin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
