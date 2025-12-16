@@ -18,7 +18,10 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onExport: () -> Unit = {},
+    onImport: () -> Unit = {},
+    showBackup: Boolean = true
 ) {
     val context = LocalContext.current
 
@@ -40,6 +43,46 @@ fun SettingsScreen(
                 .padding(innerPadding)
                 .padding(16.dp)
         ) {
+
+
+
+            if (showBackup) {
+
+                Text(
+                    text = "Backup",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                )
+
+
+                {
+                    OutlinedButton(
+                        onClick = onExport,
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Export")
+                    }
+
+                    OutlinedButton(
+                        onClick = onImport,
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Import")
+                    }
+                }
+
+            }
+
+
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,7 +107,7 @@ fun SettingsScreen(
 
                     SettingsItem(
                         title = "Version",
-                        subtitle = "0.1.0",
+                        subtitle = "0.2.0",
                         onClick = {}
                     )
                 }
@@ -104,3 +147,4 @@ private fun openUrl(context: Context, url: String) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     context.startActivity(intent)
 }
+

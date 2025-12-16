@@ -32,4 +32,7 @@ interface JotDao {
         unpinAll()
         pinJot(id)
     }
+
+    @Query("DELETE FROM jots")
+    suspend fun deleteAll()
 }

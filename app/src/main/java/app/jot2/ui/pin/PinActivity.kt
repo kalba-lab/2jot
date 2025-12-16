@@ -29,7 +29,8 @@ class PinActivity : ComponentActivity() {
             Jot2Theme {
                 if (showSettings) {
                     SettingsScreen(
-                        onBack = { showSettings = false }
+                        onBack = { showSettings = false },
+                        showBackup = false
                     )
                 } else {
                     Scaffold(
