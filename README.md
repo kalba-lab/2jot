@@ -54,7 +54,3 @@ Kotlin · Jetpack Compose · Material 3 · Room
 ## License
 
 MIT — see [LICENSE](LICENSE)
-
-## Contact
-
-[2jot.app](https://2jot.app) · contact@2jot.app
