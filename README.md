@@ -2,7 +2,7 @@
 
 **Jot it. Pin it. Done.**
 
-A note app that installs **two icons** on your phone.
+A note app that installs **two icons** on your Android phone.
 
 Website: [2jot.app](https://2jot.app)
 
