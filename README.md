@@ -4,53 +4,53 @@
 
 A note app that installs **two icons** on your phone.
 
-## What is it?
+Website: [2jot.app](https://2jot.app)
 
-**2Jot** (= "to jot") - write quick notes like a chat with yourself. Shopping list, idea, phone number, anything. One after another, like messages.
+## Problem
 
-**2Pin** (= "to pin") - shows your ONE pinned note. Today's plan? Address you need? Pin it in 2Jot, then open 2Pin — it's right there. No scrolling, no searching.
+You jot down notes all day - ideas, tasks, lists. But when you need THE important one, you scroll through everything. Too many taps. Too much friction.
+
+## Solution
+
+**2Jot** (= "to jot") - your note stream. Write quick notes like a chat with yourself.
+
+**2Pin** (= "to pin") - instant access to ONE pinned note. No scrolling, no searching.
 
 All notes stay **only on your phone**. No account. No cloud. No sync.
+```mermaid
+graph LR
+    A[Write notes] --> B[2Jot]
+    B --> C[Pin one]
+    C --> D[2Pin]
+    D --> E[Instant access]
+```
 
-## How to use
+## How it works
 
-**Basic:**
-- Open **2Jot**, write notes
-- Open **2Pin** - see your pinned note
-
-**Pin a note:**
-- Swipe right on a note, or
-- Double-tap, or
-- Long-press → Pin
-
-**Edit a note:**
-- Swipe left, or
-- Long-press → Edit
-
-**Share a note:**
-- Long-press → Share
-
-**Backup:**
-- Settings → Export (save to JSON)
-- Settings → Import (restore from JSON)
+1. Open **2Jot**, write notes
+2. Pin the important one (swipe right / double-tap / long-press)
+3. Open **2Pin** - your pinned note is right there
 
 ## Features
 
-- Chat-style note stream
-- One pinned note, instant access
-- Swipe gestures for quick actions
-- Backup & restore
-- 100% offline
-- Two launcher icons, one APK
+- 📝 Chat-style note stream
+- 📌 One pinned note, instant access
+- 👆 Swipe right to pin, swipe left to edit
+- 📤 Share notes
+- 💾 Backup & restore (JSON)
+- 🔒 100% offline
+- ⚡ Two launcher icons, one APK
 
 ## Download
 
 [Download APK](https://github.com/kalba-lab/2jot/releases/latest/download/2jot.apk)
 
-## Tech Stack
+*Google Play coming soon*
 
-Kotlin · Jetpack Compose · Material 3 · Room
+## Tech
+
+Kotlin · Jetpack Compose · Material 3
 
 ## License
 
-MIT — see [LICENSE](LICENSE)
+MIT
