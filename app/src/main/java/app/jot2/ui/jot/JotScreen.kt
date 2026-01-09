@@ -18,11 +18,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import app.jot2.data.Jot
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.text.KeyboardOptions
@@ -297,44 +300,70 @@ fun JotScreen(
     }
 
     if (editingJot != null) {
-        AlertDialog(
+        val configuration = LocalConfiguration.current
+        val screenHeight = configuration.screenHeightDp.dp
+
+        Dialog(
             onDismissRequest = {
                 editingJot = null
                 editText = ""
             },
-            title = { Text("Edit") },
-            text = {
-                OutlinedTextField(
-                    value = editText,
-                    onValueChange = { editText = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    maxLines = 6
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        editingJot?.let { jot ->
-                            if (editText.isNotBlank()) {
-                                onUpdateJot(jot, editText)
-                            }
-                        }
-                        editingJot = null
-                        editText = ""
-                    }
+            properties = DialogProperties(usePlatformDefaultWidth = false)
+        ) {
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp),
+                shape = RoundedCornerShape(16.dp),
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
                 ) {
-                    Text("Save")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = {
-                    editingJot = null
-                    editText = ""
-                }) {
-                    Text("Cancel")
+                    Text(
+                        text = "Edit",
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    OutlinedTextField(
+                        value = editText,
+                        onValueChange = { editText = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(screenHeight * 0.4f),
+                        maxLines = Int.MAX_VALUE
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        TextButton(onClick = {
+                            editingJot = null
+                            editText = ""
+                        }) {
+                            Text("Cancel")
+                        }
+                        TextButton(
+                            onClick = {
+                                editingJot?.let { jot ->
+                                    if (editText.isNotBlank()) {
+                                        onUpdateJot(jot, editText)
+                                    }
+                                }
+                                editingJot = null
+                                editText = ""
+                            }
+                        ) {
+                            Text("Save")
+                        }
+                    }
                 }
             }
-        )
+        }
     }
 }
 
