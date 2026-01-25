@@ -13,8 +13,8 @@ android {
         applicationId = "app.jot2"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.2.1"
+        versionCode = 4
+        versionName = "0.2.2"
     }
 
     buildTypes {

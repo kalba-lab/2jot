@@ -46,7 +46,7 @@ fun JotScreen(
     var inputText by remember { mutableStateOf("") }
     var selectedJot by remember { mutableStateOf<Jot?>(null) }
     var showMenu by remember { mutableStateOf(false) }
-    var editingJot by remember { mutableStateOf<Jot?>(null) }
+    var editingJotId by remember { mutableStateOf<Long?>(null) }
     var editText by remember { mutableStateOf("") }
 
     val listState = rememberLazyListState()
@@ -54,6 +54,14 @@ fun JotScreen(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     val context = LocalContext.current
+
+    LaunchedEffect(editingJotId) {
+        editingJotId?.let { id ->
+            jots.find { it.id == id }?.let { jot ->
+                editText = jot.text
+            }
+        }
+    }
 
     Column(
         modifier = modifier
@@ -106,8 +114,7 @@ fun JotScreen(
                                     false
                                 }
                                 SwipeToDismissBoxValue.EndToStart -> {
-                                    editingJot = jot
-                                    editText = jot.text
+                                    editingJotId = jot.id
                                     false
                                 }
                                 SwipeToDismissBoxValue.Settled -> false
@@ -234,8 +241,9 @@ fun JotScreen(
 
                     TextButton(
                         onClick = {
-                            editingJot = selectedJot
-                            editText = selectedJot?.text ?: ""
+                            selectedJot?.let { jot ->
+                                editingJotId = jot.id
+                            }
                             showMenu = false
                             selectedJot = null
                         },
@@ -299,13 +307,14 @@ fun JotScreen(
         )
     }
 
+    val editingJot = editingJotId?.let { id -> jots.find { it.id == id } }
     if (editingJot != null) {
         val configuration = LocalConfiguration.current
         val screenHeight = configuration.screenHeightDp.dp
 
         Dialog(
             onDismissRequest = {
-                editingJot = null
+                editingJotId = null
                 editText = ""
             },
             properties = DialogProperties(usePlatformDefaultWidth = false)
@@ -342,19 +351,17 @@ fun JotScreen(
                         horizontalArrangement = Arrangement.End
                     ) {
                         TextButton(onClick = {
-                            editingJot = null
+                            editingJotId = null
                             editText = ""
                         }) {
                             Text("Cancel")
                         }
                         TextButton(
                             onClick = {
-                                editingJot?.let { jot ->
-                                    if (editText.isNotBlank()) {
-                                        onUpdateJot(jot, editText)
-                                    }
+                                if (editText.isNotBlank()) {
+                                    onUpdateJot(editingJot, editText)
                                 }
-                                editingJot = null
+                                editingJotId = null
                                 editText = ""
                             }
                         ) {
