@@ -4,7 +4,7 @@
 
 A note app that installs **two icons** on your Android phone.
 
-Website: [2jot.app](https://2jot.app)
+Website: [kalba.dev/apps/2Jot](https://kalba.dev/apps/2Jot/)
 
 ## Problem
 
